@@ -1,0 +1,196 @@
+---
+title: "RMD Template"
+author: 
+  - Foo Bar^[baz, affiliation]
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+header-includes:
+  # - \usepackage{setspace}\doublespacing
+  - \usepackage{amsmath}
+editor_options:
+  chunk_output_type: console
+output: 
+  # bookdown::html_document2
+  bookdown::pdf_document2
+  # bookdown::word_document2
+bibliography: bibliography.bib
+link-citations: yes
+toc: no
+urlcolor: blue
+---
+
+```{r r-setup, include=FALSE}
+## knitr options
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(eval = FALSE)
+knitr::opts_chunk$set(cache = TRUE)
+knitr::opts_chunk$set(results = 'hide')
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(fig.align = 'center')
+
+## R options
+options(digits=3)
+
+require(datzen)
+require(dplyr)
+```
+
+check out [markdown syntax](https://rmarkdown.rstudio.com/authoring_pandoc_markdown.html)
+
+# Intro: What to do and Why
+
+Computations done in R [@rstats] .
+
+Following methods of `[@ref2_temp]` .
+
+* blah 
+  + blah blah
+  
+
+
+## Manual Pandoc Tables
+
+See the table \@ref(tab:table-syntax)
+
+|       | One | Two   |
+|-------|-----|-------|
+| row 1 | `f(...)` | $f(.)$ |
+| row 2 | code  | latex  |
+
+Table: (\#tab:table-syntax) Foo Caption
+
+## knitr table to structure easier
+
+See the table \@ref(tab:table-function)
+
+```{r table-function, results='asis',echo=FALSE}
+
+out = cbind(
+c('predict(brms(...,sample_prior="only"))',
+  'predict(brms(...,sample_prior=FALSE))'),
+c('brms(...,sample_prior=FALSE)'))
+
+rownames(out) = c('prior','posterior')
+colnames(out) = c('Predictive (LHS Outcome)','Parameter (RHS Component)')
+
+knitr::kable(out,
+             format='latex',
+             align='c',
+             booktabs=TRUE,
+             caption = 'Function Analogues of Distributions')
+```
+
+## Alignment in equation blocks
+
+results in formula \@ref(eq:fay-herriot) below
+
+
+
+\begin{equation}
+\begin{aligned}
+Y &\sim MVN(\theta X, \epsilon I) \\
+\theta_p &\sim N(\mu_p,1) \forall p \in 1,\ldots,P \\
+\epsilon &\sim Normal(0,\sigma)\\
+\sigma &\sim t(3, 0, 10)
+\end{aligned}
+(\#eq:fay-herriot)
+\end{equation}
+
+
+
+
+
+```{r setup-ex-reg, results='asis'}
+seed_pick = 123
+
+dat_real = iris
+
+dat_temp = dat_real %>% 
+  distinct(.,Species,.keep_all = TRUE)
+
+formula_spec = Sepal.Length ~ -1 + Sepal.Width + Petal.Length + Petal.Width + Species
+
+```
+
+# Section 2
+
+
+## Reference Knitr Tables
+
+```{r table-knitr-1, results="asis",echo=FALSE}
+
+
+out_1 = head(iris)
+
+row.names(out_1) = letters[1:(nrow(out_1))]
+
+knitr::kable(out_1,
+booktabs = TRUE,
+caption = 'A Table of Blah Blah')
+
+```
+
+As desired, the second row of Table \@ref(tab:table-knitr-1) shows that blah blah blah. In the next section, we will see bloop bloop bloop.
+
+## Reference Figures
+
+Comparing table \@ref(tab:table-knitr-1) with table \@ref(tab:table-knitr-2) we see that blah blah blah. The bloop bloop bloop.
+
+
+```{r table-knitr-2, results="asis"}
+
+out_2 = rbind(t(head(iris)),
+            t(head(iris))
+            )
+
+row.names(out_2) = letters[1:(nrow(out))]
+
+knitr::kable(out,
+booktabs = TRUE,
+caption = 'A Table of Bloop Bloop')
+
+```
+
+To reference tables in the appendix, see appendix table \@ref(tab:table-knitr-fake)
+
+Making reference to Figure \@ref(fig:fig-hist-iris) maps to the chunk name
+
+```{r fig-hist-iris,fig.cap="histogram for iris"}
+hist(iris$Sepal.Length)
+```
+
+# Discussion: We did this and showed that, maybe try out
+
+We did this and showed that.
+
+
+# Appendix
+
+## A
+
+We purposely compare two fake datasets here in the appendix.
+
+
+```{r setup-ex-fake}
+
+y_fake_1 = rnorm(-100,n=nrow(dat_temp))
+dat_fake_1 = cbind(Sepal.Length=y_fake_1,dat_temp[,-1])
+
+y_fake_2 = rnorm(100,n=nrow(dat_temp))
+dat_fake_2 = cbind(Sepal.Length=y_fake_2,dat_temp[,-1])
+
+
+```
+
+```{r table-knitr-fake, results='markup'}
+out_temp = rbind(head(dat_fake1,
+                      head(dat_fake2)
+                      )
+                 )
+knitr::kable(out_temp)
+```
+
+
+```
+place bibliography.bib file in same directory, leave # References section blank 
+```
+# References

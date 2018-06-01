@@ -1,0 +1,49 @@
+# https://stackoverflow.com/questions/35158708/how-to-set-default-template-for-new-r-files-in-rstudio
+# Tools => Global Options => Code => Tab Editing => Snippets "Edit Snippets".
+# copy paste the below into above "Edit Snippets" box
+
+snippet newscript
+	# https://github.com/mikejacktzen/proj_skel.git
+	# git@github.com:mikejacktzen/proj_skel.git
+	library(dplyr)
+	library(datzen)
+	library(here)
+	
+	options(stringsAsFactors = FALSE)
+	
+	datzen::rmabd()
+	
+	###########################
+	# check / set parent directory to be used for relative paths later on
+	###########################
+	here::here()
+	
+	# here::set_here(path = "~/projects/proj_skel/", verbose = TRUE)
+	# here::here()
+	
+  ###########################
+  # read in files
+  ###########################
+  list.files(here::here('data','raw'),full.names=TRUE)
+  
+  # dat = readr::read_csv(list.files(here('data','raw'),full.names=TRUE)[1])
+  # dat_raw = haven::read_dta(here('data','raw'))
+  # ?datzen::readss
+  
+  # ?datzen::colname_zen
+  
+  
+  # assess if common cleaning needed
+  # https://github.com/sfirke/janitor
+  
+  
+  # skimr::skim(dat_raw) %>% pander::pander()
+  
+  
+  # source(list.files(here('data','raw'),full.names=TRUE)[1])
+  
+	###########################
+	# write out files
+	###########################	
+	# saveRDS(x=foo,here("data","proc","foo.rds"))
+	# readr::write_csv(foo,here("data","proc","foo.csv"))
