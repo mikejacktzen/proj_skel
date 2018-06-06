@@ -20,6 +20,12 @@
 * place writeup in `/writeup/`
 * formal assertion-travisci tests in `/tests/`
 
+## Optional local offline clone (fork)
+In destination directory, use command in command line
+`git clone \..\source\.git \..\destination\`
+
+see this for [local clone](https://stackoverflow.com/questions/21045061/git-clone-from-another-directory?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)
+
 ## Optional push to Github
 * push your local project to new github repo (**NOT** `proj_skel`)
 0. login github
