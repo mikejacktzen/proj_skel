@@ -21,27 +21,18 @@ snippet newscript
 	# here::set_here(path = "~/projects/proj_skel/", verbose = TRUE)
 	# here::here()
 	
-  ###########################
-  # read in files
-  ###########################
-  list.files(here::here('data','raw'),full.names=TRUE)
-  
-  # dat = readr::read_csv(list.files(here('data','raw'),full.names=TRUE)[1])
-  # dat_raw = haven::read_dta(here('data','raw'))
-  # ?datzen::readss
-  
-  # ?datzen::colname_zen
-  
-  
-  # assess if common cleaning needed
-  # https://github.com/sfirke/janitor
-  
-  
-  # skimr::skim(dat_raw) %>% pander::pander()
-  
-  
-  # source(list.files(here('data','raw'),full.names=TRUE)[1])
-  
+	###########################
+	# read in files
+	###########################
+	list.files(here::here('data','raw'),full.names=TRUE)
+	# read.csv(list.files(here('data','raw'),full.names=TRUE)[1])
+	# source(list.files(here('data','raw'),full.names=TRUE)[1])
+	# ?datzen::readss
+	
+	# assess if common cleaning needed
+	# ?datzen::colname_zen
+	# https://github.com/sfirke/janitor
+	
 	###########################
 	# write out files
 	###########################	
