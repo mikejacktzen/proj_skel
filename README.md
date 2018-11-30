@@ -31,8 +31,13 @@ see this for [local clone](https://stackoverflow.com/questions/21045061/git-clon
 0. login github
 1. create a new github repo `https://github.com/new`
 2. See [this](http://r-pkgs.had.co.nz/git.html#github-init)
-* tell local git where to look on github `git remote add github git@foo_new_name_from_step_1`
-* push local git to remote github `git push -u github master`
+* The remote repo destination likely already exists (the template repo) so remove it, if cloned project template from github (via Setup section)
+    * `git remote -v show`
+    * `git remote rm origin`
+* tell local git where to look on github (new repo from step 1)
+    * `git remote add github git@foo_new_name_from_step_1`
+* push local git to remote github 
+    * `git push -u github master`
 3. See general reference on [remote repos](https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes)
 
 ## Optional Collaboraters
