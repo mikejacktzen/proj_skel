@@ -1,0 +1,76 @@
+# Workflow
+
+## Source Document 1st Draft (Content)
+
+1. Write draft article in google doc for easy collaboration
+* 'writeup_draft_focus_content.txt'
+
+2. FOCUS on content
+
+3. Do NOT use google doc font features for final output (will be ignored)
+*Only use google doc font features to focus attention of collaborators
+
+4. Write using Bookdown rules (Markdown with Cross References)
+    https://bookdown.org/yihui/bookdown/markdown-syntax.html#inline-formatting
+
+* Cross References (equations, tables, figures)  
+\@ref(eq:your_equation_name)  
+\@ref(tab:your_table_name)  
+\@ref(fig:your_figure_name)  
+
+### Source Document 2nd Draft (Style)
+
+5. Compile Locally via Rstudio
+* Sync Google Drive to Local Computer
+* After settling on main content, use Rstudio+rmd+pandoc to automaticaly compile into html/pdf
+    https://bookdown.org/yihui/bookdown/yaml-options.html
+* copy contents of  'writeup_draft_focus_content.txt' 
+* paste into 'rmd_4_pandoc_conv.Rmd'
+* Rstudio > Knit
+
+6. Pause / Resume google drive sync local to cloud
+
+# Markdown Details	
+
+## Math
+
+* Inline Math
+$\theta+3$ 
+
+* numbered equations 
+\begin{equation}
+\theta+3
+(\#eq:your_equation_name)
+\end{eqution}
+
+## Images
+1. Use r markdown chunk where the body r code uses `knitr::include_graphics("path_to_fig.png")`
+    https://bookdown.org/yihui/bookdown/figures.html
+2. The r chunk label 'label-foo' will be auto converted to figure labels
+3. Use bookdown 'text reference' for contents of figure caption
+    https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#text-references
+4. The r chunk reference fig.cap='(ref:cap-ref-foo)' will auto add step 3s figure caption
+
+(ref:cap-ref-foo) blah blah this is contents of figure caption
+
+```{r label-foo,fig.cap='(ref:cap-ref-foo)',echo=FALSE,fig.align='center'}
+knitr::include_graphics("path_to_fig.png")
+```
+
+
+## Tables
+1. Create Tables using Google Sheets
+2. Then copy cells and convert into Markdown Table via
+https://www.tablesgenerator.com/markdown_tables
+
+3. Paste Markdown Table into source doc
+4. Add footnote below markdown table in source doc
+
+ Sepal.Length   Sepal.Width   Petal.Length   Petal.Width
+-------------  ------------  -------------  ------------
+          5.1           3.5            1.4           0.2
+          4.9           3.0            1.4           0.2
+Table: (\#tab:your_table_name) Blah Blah Table Narrative Blah 
+
+
+
