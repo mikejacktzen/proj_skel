@@ -10,13 +10,12 @@ snippet newscrape
 
   your_custom_func_arg1_arg2_in_df = function(){
     Sys.sleep(3.0)
-    message(id,pubid)
+    message(arg1,arg2)
   }
 
   df_args[,c('arg1','arg2')] %>%
     # df_args[1:2,c('arg1','arg2')] %>%    
     purrr::pmap(.f=Vectorize(purrr::possibly(your_custom_func_arg1_arg2_in_df,NA)))
-
 
   # url = 'www.google.com'
 
@@ -36,9 +35,8 @@ snippet newscrape
   file_path_your_file=paste0(getwd(),'/tab_out',Sys.Date(),'.csv')
   write.csv(tab_output,file=file_path_your_file,row.names=FALSE)
 
-
-  # loop --------------------------------------------------------------------
-
+  # loop
+  
   vec_url_all_iters = vector(mode = 'list',length=num_urls)
 
   for(i in seq_along(url_all_iters)){
