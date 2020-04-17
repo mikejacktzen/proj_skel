@@ -10,6 +10,7 @@ snippet newscript
 	library(here)
 	
 	options(stringsAsFactors = FALSE)
+	options(row.names = FALSE)
 	
 	datzen::rmabd()
 	
@@ -31,7 +32,16 @@ snippet newscript
 	
 	# assess if common cleaning needed
 	# ?datzen::colname_zen
-	# https://github.com/sfirke/janitor
+	# ?janitor:::clean_names()
+	
+	your_custom_func_arg1_arg2_in_df = function(){
+	Sys.sleep(3.0)
+	message(arg1,arg2)
+	}
+	
+	df_args[,c('arg1','arg2')] %>%
+	# df_args[1:2,c('arg1','arg2')] %>%
+	purrr::pmap(.f=Vectorize(purrr::possibly(your_custom_func_arg1_arg2_in_df,NA)))
 	
 	###########################
 	# write out files
