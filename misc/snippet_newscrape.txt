@@ -47,3 +47,37 @@ snippet newscrape
 	# saveRDS()
 	# write.csv()
 	}
+	
+	# selenium for dynamic pages
+	# https://docs.ropensci.org/RSelenium/articles/saucelabs.html
+
+	library(RSelenium)
+	library(XML)
+
+	remDr <- remoteDriver(remoteServerAddr = 'selenium',
+	                      port = 0000L,  # foo example need actual port
+	                      browserName='chrome')
+
+	remDr$open(silent=TRUE) # open web browser
+	head(remDr$sessionInfo)
+
+	url = "https://www.google.com/"
+	remDr$navigate(url)
+	remDr$screenshot(display = TRUE)
+
+
+	Sys.sleep(3.0)
+	html_src_site = XML::htmlParse(remDr$getPageSource()[[1]])
+
+	# getwd()
+	Sys.setenv(TZ = "America/Los_Angeles")
+	Sys.Date()
+
+	# "America/Los_Angeles"
+
+	XML::saveXML(html_src_site,
+	             paste0("~/mntcnt/temp/cdc_covid/archive/html_",
+	                    Sys.Date(),".txt")
+	             )
+
+	# use cron to automate schedule
