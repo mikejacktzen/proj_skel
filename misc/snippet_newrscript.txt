@@ -1,0 +1,38 @@
+snippet newrscript
+	commandargs <- commandArgs(TRUE)
+	
+	# this meta script accepts command line args for Rscript
+	# then sources a standalone .R file
+	# then writes out output with filename indexed by command line args
+	# useful for top level embarrassingly  parallel iterations
+
+	# mod_name = 'mod_001'
+	mod_name = as.character(commandargs[[1]])
+	
+	# iter_commandargs = 1000
+	iter_commandargs = as.integer(commandargs[[2]])
+	
+	# chain_commandargs = 1
+	chain_commandargs = as.integer(commandargs[[3]])
+	
+	message(mod_name,iter_commandargs,chain_commandargs)
+	
+	# static suffix
+	suff_dir = '/runs/'
+	
+	# the source R code
+	source(paste0('~/.../project',suff_dir,mod_name,'.R'))
+	
+	# output to be saved
+	out = f(iter_commandargs,chain_commandargs)
+	
+	saveRDS(out,paste0('~/.../project/',suff_dir,mod_name,'_',chain_commandargs,'.rds'))
+	
+	
+	## bash command line
+	# for ii in 1 2; 
+	# do
+	# mod_ver="001"
+	# nohup Rscript ~/.../run_cli.R mod_$mod_ver 1000 $ii &> log_$mod_ver.out &
+	# done
+	
