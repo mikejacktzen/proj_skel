@@ -17,6 +17,10 @@ snippet newrscript
 	
 	message(mod_name,iter_commandargs,chain_commandargs)
 	
+	message(paste0('pid ',Sys.getpid()))
+	message(paste0('mod name ',mod_name))
+	message('')
+	
 	# static suffix
 	suff_dir = '/runs/'
 	
